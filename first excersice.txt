@@ -1,0 +1,69 @@
+Ticket 1: Add a custom id field for Agents in the Facilities table
+
+Description: Currently, Agents' ids on reports are their internal database ids. This ticket requires adding a custom id field for each Agent in the Facilities table.
+
+Acceptance criteria:
+
+A new column "custom_id" is added to the Facilities table.
+The custom_id field can be updated for each Agent in the Facilities table.
+When generating reports, the custom_id field is used instead of the internal database id.
+Time/effort estimate:
+
+Development time: 2-4 hours
+Testing time: 1-2 hours
+Implementation details:
+
+Add a new column "custom_id" to the Facilities table using a database migration script.
+Modify the Agent object in the code to include the custom_id field.
+Modify the getShiftsByFacility function to return the custom_id for each Agent.
+Modify the generateReport function to use the custom_id field instead of the internal database id.
+Ticket 2: Add a custom id field for Agents in the Shifts table
+
+Description: Currently, the Shifts table only has a reference to the Agent's internal database id. This ticket requires adding a custom_id field for each Agent in the Shifts table.
+
+Acceptance criteria:
+
+A new column "custom_id" is added to the Shifts table.
+When creating a new Shift, the custom_id field can be populated with the custom_id of the Agent.
+When retrieving Shifts, the custom_id field is returned instead of the internal database id.
+Time/effort estimate:
+
+Development time: 2-4 hours
+Testing time: 1-2 hours
+Implementation details:
+
+Add a new column "custom_id" to the Shifts table using a database migration script.
+Modify the createShift function to allow passing in the custom_id of the Agent.
+Modify the getShiftsByFacility function to return the custom_id for each Agent.
+Ticket 3: Update report generation to use custom_id instead of internal database id
+
+Description: Currently, the report generation function uses the internal database id to identify Agents. This ticket requires updating the function to use the custom_id field instead.
+
+Acceptance criteria:
+
+The generateReport function uses the custom_id field instead of the internal database id.
+Reports generated using the updated function correctly display the custom_id for each Agent.
+Time/effort estimate:
+
+Development time: 1-2 hours
+Testing time: 1-2 hours
+Implementation details:
+
+Modify the generateReport function to use the custom_id field instead of the internal database id.
+Ticket 4 (Optional): Add validation for the custom_id field in the Facilities and Shifts tables
+
+Description: To ensure data consistency, it may be necessary to add validation for the custom_id field in both the Facilities and Shifts tables.
+
+Acceptance criteria:
+
+When creating or updating a Facility or Shift, the custom_id field is validated to ensure it is unique.
+When creating or updating a Facility or Shift, the custom_id field is validated to ensure it is not null or empty.
+Time/effort estimate:
+
+Development time: 2-4 hours
+Testing time: 1-2 hours
+Implementation details:
+
+Add validation rules to the database schema for the custom_id field.
+Modify the create/update functions to check for validation errors and throw exceptions if necessary.
+Note: Ticket 4 may not be necessary depending on the existing validation in the codebase and the project's specific requirements.
